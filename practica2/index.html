@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Flickr fotos publicas</title>
+         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/black-tie/jquery-ui.css" />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="credencialesFlickr.js"></script>
+        <script src="app.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    </head>
+    <body>
+        <section>
+            <h1>Flickr getPublicPhotos</h1>
+
+            <form action="/">
+   			    <p> Fecha mínima de captura:
+   				  <input type="text" id="datepicker">
+            <input type="button" id="dpbutton" value="Buscar">
+            </p>
+            <p> Fecha máxima de captura:
+   				  <input type="text" id="datepicker2">
+            <input type="button" id="dpbutton2" value="Buscar">
+            </p>
+
+            </form>
+            <div id="imagenes">
+            <span id ="cabeceras"></span>
+          </div>
+        </section>
+    </body>
+</html>
