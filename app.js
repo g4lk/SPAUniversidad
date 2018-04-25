@@ -2,13 +2,14 @@
 var galeria;
 
 
+
 $(window).load(function() { // Ejecutar cuando la web esté ya cargada
-	$("#cargando").delay(2000).hide(0);
+	$("#cargando").delay(2600).hide(0);
 });
 
 //Inicializamos campos de busqueda
 
-inicializarDatapicker(); // Para generar los datapicker y sus funciones
+
 
 
 $(function() {
@@ -39,9 +40,9 @@ $(function() {
 
 // *********************************** CRITERIOS DEL BUSCADOR ****************************** //
 
-		var min_take_date; // Fecha mínima de captura
+		var min_taken_date; // Fecha mínima de captura
 		if ($("#minTakeDate").datepicker('getDate') != null) {
-			min_take_date = $("#minTakeDate").datepicker('getDate').getTime() / 1000;
+			min_taken_date = $("#minTakeDate").datepicker('getDate').getTime() / 1000;
 		}
 
 		var max_taken_date; // Fecha máxima de captura
@@ -67,22 +68,22 @@ $(function() {
 
 		var urlBusqueda = "https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=" + api_key + "&user_id=" +user_id;
 
-		if (typeof min_take_date != "undefined") {
-			urlBusqueda = urlBusqueda + "&min_taken_date=" + min_take_date;
+		if (typeof min_taken_date != "undefined") {
+			urlBusqueda +=  "&min_taken_date=" + min_taken_date;
 		}
 
 		if (typeof max_taken_date != "undefined") {
-			urlBusqueda = urlBusqueda + "&max_taken_date=" + max_taken_date;
+			urlBusqueda += "&max_taken_date=" + max_taken_date;
 		}
 
 		if (typeof tags != "undefined") {
-			urlBusqueda = urlBusqueda + "&tags=" + tags;
+			urlBusqueda += "&tags=" + tags;
 		}
 		if (typeof texto != "undefined"){
-				urlBusqueda = urlBusqueda + "text=" + texto;
+				urlBusqueda += "&text=" + texto;
 		}
 
-		urlBusqueda = urlBusqueda + "&content_type=" + contenido + "&safe_search=" + tipoBusqueda + "&format=json&nojsoncallback=1";
+		urlBusqueda += "&content_type=" + contenido + "&safe_search=" + tipoBusqueda + "&format=json&nojsoncallback=1";
 
 		//Hacemos la consulta a la url formada
 		$.getJSON(urlBusqueda,
@@ -96,6 +97,8 @@ $(function() {
         	scrollTop: $('#vista-grande').offset().top
     	}, 600);
 	});
+
+	inicializarDatapicker(); // Para generar los datapicker y sus funciones
 });
 
 function inicializarDatapicker() {
@@ -123,7 +126,7 @@ function inicializarDatapicker() {
 			$.datepicker.regional[$(this).val()]);
 		$("#maxTakeDate").datepicker("option",
 			$.datepicker.regional[$(this).val()]);
-    });
+  });
 
 	$("#minTakeDate").datepicker();
 	$("#maxTakeDate").datepicker();
@@ -135,7 +138,7 @@ function asignarClic() {
 			$("#titulo").text(galeria.title[this.id]);
 			$('body, html').animate({
         		scrollTop: $('#vista-grande').offset().top
-    		}, 600);
+    		}, 700);
 		}
 	});
 }
@@ -175,7 +178,6 @@ function crearGaleria() {
 	this.clear = function() {
 		$("#miniaturas").empty();
 		$("#vista-grande").empty();
-		$("#cargando").show();
+		$("#cargando").show().delay(2600).hide(0);
 	}
-
 }
