@@ -53,16 +53,28 @@ $(function() {
 		var tags; // tags
 		if ($("#tags").val() != "") {
 			tags = $("#tags").val();
+
 		}
 		var texto; //texto en foto (Título tag o descripción)
 		if ($("#texto").val() != "") {
 			texto = $("#texto").val();
 		}
 
+		$("#criterios").empty();
+		$("#criterios").append("<p><h3>Estos son tus criterios:</h3></p>")
 		var contenido = $("#contenido").val(); // tipo de contenido
+    $("#criterios").append("<p><h4>Tipo de contenido: "+$("#contenido option:selected").text()+"</h4></p>");
+
+
+
 
 
 		var tipoBusqueda = $("#busquedaSegura").val(); // tipo de busqueda
+				$("#criterios").append("<p><h4>Tipo de busqueda: "+$("#busquedaSegura option:selected").text()+"</h4></p>");
+
+
+
+
 
 		//Generamos la consulta con todos los campos
 
@@ -70,17 +82,22 @@ $(function() {
 
 		if (typeof min_taken_date != "undefined") {
 			urlBusqueda +=  "&min_taken_date=" + min_taken_date;
+			$("#criterios").append("<p><h4>Minima fecha de captura: "+min_taken_date+"</h4></p>")
+
 		}
 
 		if (typeof max_taken_date != "undefined") {
 			urlBusqueda += "&max_taken_date=" + max_taken_date;
+			$("#criterios").append("<p><h4>Maxima fecha de captura: "+max_taken_date+"</h4></p>")
 		}
 
 		if (typeof tags != "undefined") {
 			urlBusqueda += "&tags=" + tags;
+			$("#criterios").append("<p><h4>Tags: "+tags+"</h4></p>")
 		}
 		if (typeof texto != "undefined"){
 				urlBusqueda += "&text=" + texto;
+				$("#criterios").append("<p><h4>Texto en foto: "+texto+"</h4></p>")
 		}
 
 		urlBusqueda += "&content_type=" + contenido + "&safe_search=" + tipoBusqueda + "&format=json&nojsoncallback=1";
